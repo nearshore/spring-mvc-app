@@ -25,6 +25,33 @@ Chocolatey is a great way to manage packages on Windows, the guide provides init
 * [Vagrant](https://www.vagrantup.com/downloads.html)
 * [MSYS2](http://www.msys2.org/)
 
+##### Prerequisites on Windows 7 Professional SP1
+
+Verify your PowerShell (aka 'ps') version. Open a ps console and run the command
+
+```
+$PSVersionTable.PSVersion
+
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+2      0      -1     -1
+```
+If the number under Major column is lesser than 3, update ps in win7 to v3
+
+* [Download and install Windows6.1-KB2506143-x64.msu](https://www.microsoft.com/en-us/download/details.aspx?id=34595)
+
+After the installation it ask you for a restart.
+
+Verifying ps is installed correctly
+
+```
+$PSVersionTable.PSVersion
+
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+3      0      -1     -1
+```
+
 ##### Installing Chocolatey
 
 Run the following command from an administrative PowerShell v3+ prompt (Ensure Get-ExecutionPolicy is not Restricted):
