@@ -113,7 +113,7 @@ $ git clone https://username@github.com/username/spring-mvc-app
 
 ### 3. Use Vagrant to provision the environment
 
-Open a shell and change to your ```spring-mvc-app``` directory, then run ```vagrant up``` command. This will download for the first time and setup a *VirtualBox* image with required tools for your development environment.
+Open a shell (*you could use MSYS2 or ps to run vagrant/docker commands*) and change to your ```spring-mvc-app``` directory, then run ```vagrant up``` command. This will download for the first time and setup a *VirtualBox* image with required tools for your development environment.
 
 ```bash
 cd spring-mvc-app
@@ -127,6 +127,7 @@ Once completed you can work inside the guest by running the following command to
 ```bash
 $ vagrant ssh
 ```
+> If you are running this command from ps and it didn't work: Search for ssh.exe on your computer, copy the Path (i.e. C:\Program Files (x86)\Git\bin), open System Preferences, find the Environment variable Settings, click on the Path Variable, add the path, separating the existing paths using ```;```.
 
 ### 4. Build and Compose
 
