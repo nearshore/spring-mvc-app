@@ -138,6 +138,17 @@ $ cd /vagrant
 $ ./gradlew build
 ```
 
+> If you ran into the next problem running ```$ ./gradlew build```
+> ```
+> $ ./gradlew build
+> /usr/bin/env: ‘bash\r’: No such file or directory
+> ```
+> Execute next commands:
+> ```
+> $ sed $'s/\r$//' ./gradlew > ./gradlew.Unix
+> $ ./gradlew.Unix build
+> ```
+
 Once compilation is completed a JAR file will be generated, with that you would have everything you need to deploy the solution, which is done using ```docker-compose``` command.
 
 ```bash
