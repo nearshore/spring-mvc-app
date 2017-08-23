@@ -122,6 +122,31 @@ $ vagrant up
 
 The execution of the command above should start and provision the environment specified at the Vagrant configuration file.
 
+> ##### Issue
+> If you ran ```$ vagrant up``` command from *MSYS2* and you got: ```command not found``` message,
+> you have to add the binary path to the *PATH* variable:
+> 
+> Open *C:\tools\msys64\home\user\.bash_profile* and add this to the end of the file:
+> ```
+> export PATH=$PATH:/c/HashiCorp/Vagrant/bin
+> ```
+> then from *MSYS2* run 
+> ```
+> $ source .bash_profile
+> ```
+> now you must be able to run again ```$ vagrant up```
+
+> ##### Issue
+> If you are getting this message:
+> ```
+> Vagrant cannot forward the specified ports on this VM, since they would collide with some other application 
+> that is already listening on these ports. The forwarded port to 9080 is already in use on the host machine.
+> ```
+> after run ```$ vagrant up```, this is maybe because another vagrant instance was hung up, you can fix it executing:
+> ```
+> $ vagrant suspend
+> ```
+
 Once completed you can work inside the guest by running the following command to open an SSH connection to the guest host.
 
 ```bash
