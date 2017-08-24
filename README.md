@@ -154,6 +154,8 @@ $ vagrant ssh
 ```
 > If you are running this command from ps and it didn't work: Search for ssh.exe on your computer, copy the Path (i.e. C:\Program Files (x86)\Git\bin), open System Preferences, find the Environment variable Settings, click on the Path Variable, add the path, separating the existing paths using ```;```.
 
+> **_Tip._** The shell (and SSH) session can be terminated with *exit* or *CTRL+D*.
+
 ### 4. Build and Compose
 
 Run commands below in order to get your project up and running. First you compile the application. In order to do that you need to move to the directory where project files are stored inside the guest, that is the ```/vagrant``` directory, and execute the Gradle build script.
@@ -188,4 +190,7 @@ Once containers are up you will be able to access the application from a browser
 * Tomcat: http://localhost:8080
 
 Read more about Docker Compose commands on the [reference](https://docs.docker.com/compose/reference/) guide.
+
+
+> **_Tip._** You can end *$ docker-compose up* with *CTRL+C*
 
