@@ -17,7 +17,17 @@ public class HelloController {
     
     model.addAttribute("name", name);
     return "hello";
+  }
+
+  @RequestMapping("/hello-cd")
+  public String greeting(@RequestParam(value="name",
+                                       required=false,
+                                       defaultValue="Continuous Delivery")
+                         String name,
+                         Model model) {
     
+    model.addAttribute("name", name);
+    return "hello";
   }
 
 }
