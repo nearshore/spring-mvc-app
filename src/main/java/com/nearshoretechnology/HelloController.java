@@ -20,7 +20,7 @@ public class HelloController {
   }
 
   @RequestMapping("/hello-cd")
-  public String greeting(@RequestParam(value="name",
+  public String greetingCd(@RequestParam(value="name",
                                        required=false,
                                        defaultValue="Continuous Delivery")
                          String name,
