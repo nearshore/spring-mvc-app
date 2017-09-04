@@ -38,8 +38,8 @@ node {
         }
     }
 
-    stage('Updating Stage') {
-        sshagent (credentials: ['stage-server-ssh-credentials']) {
+    stage('Updating Production Server') {
+        sshagent (credentials: ['production-server-ssh-credentials']) {
             sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2200 10.26.0.130 /vagrant/update-image-spring-mvc-app-cd'
         }
     }
