@@ -25,6 +25,33 @@ Chocolatey is a great way to manage packages on Windows, the guide provides init
 * [Vagrant](https://www.vagrantup.com/downloads.html)
 * [MSYS2](http://www.msys2.org/)
 
+##### Prerequisites on Windows 7 Professional SP1
+
+Verify your PowerShell (aka 'ps') version. Open a ps console and run the command
+
+```
+$PSVersionTable.PSVersion
+
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+2      0      -1     -1
+```
+If the number under Major column is lesser than 3, update ps in win7 to v3
+
+* [Download and install Windows6.1-KB2506143-x64.msu](https://www.microsoft.com/en-us/download/details.aspx?id=34595)
+
+After the installation it ask you for a restart.
+
+Verifying ps is installed correctly
+
+```
+$PSVersionTable.PSVersion
+
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+3      0      -1     -1
+```
+
 ##### Installing Chocolatey
 
 Run the following command from an administrative PowerShell v3+ prompt (Ensure Get-ExecutionPolicy is not Restricted):
@@ -86,7 +113,7 @@ $ git clone https://username@github.com/username/spring-mvc-app
 
 ### 3. Use Vagrant to provision the environment
 
-Open a shell and change to your ```spring-mvc-app``` directory, then run ```vagrant up``` command. This will download for the first time and setup a *VirtualBox* image with required tools for your development environment.
+Open a shell (*you could use MSYS2 or ps to run vagrant/docker commands*) and change to your ```spring-mvc-app``` directory, then run ```vagrant up``` command. This will download for the first time and setup a *VirtualBox* image with required tools for your development environment.
 
 ```bash
 cd spring-mvc-app
@@ -95,11 +122,39 @@ $ vagrant up
 
 The execution of the command above should start and provision the environment specified at the Vagrant configuration file.
 
+> ##### Issue
+> If you ran ```$ vagrant up``` command from *MSYS2* and you got: ```command not found``` message,
+> you have to add the binary path to the *PATH* variable:
+> 
+> Open *C:\tools\msys64\home\user\.bash_profile* and add this to the end of the file:
+> ```
+> export PATH=$PATH:/c/HashiCorp/Vagrant/bin
+> ```
+> then from *MSYS2* run 
+> ```
+> $ source .bash_profile
+> ```
+> now you must be able to run again ```$ vagrant up```
+
+> ##### Issue
+> If you are getting this message:
+> ```
+> Vagrant cannot forward the specified ports on this VM, since they would collide with some other application 
+> that is already listening on these ports. The forwarded port to 9080 is already in use on the host machine.
+> ```
+> after run ```$ vagrant up```, this is maybe because another vagrant instance was hung up, you can fix it executing:
+> ```
+> $ vagrant suspend
+> ```
+
 Once completed you can work inside the guest by running the following command to open an SSH connection to the guest host.
 
 ```bash
 $ vagrant ssh
 ```
+> If you are running this command from ps and it didn't work: Search for ssh.exe on your computer, copy the Path (i.e. C:\Program Files (x86)\Git\bin), open System Preferences, find the Environment variable Settings, click on the Path Variable, add the path, separating the existing paths using ```;```.
+
+> **_Tip._** The shell (and SSH) session can be terminated with *exit* or *CTRL+D*.
 
 ### 4. Build and Compose
 
@@ -109,6 +164,17 @@ Run commands below in order to get your project up and running. First you compil
 $ cd /vagrant
 $ ./gradlew build
 ```
+
+> If you ran into the next problem running ```$ ./gradlew build```
+> ```
+> $ ./gradlew build
+> /usr/bin/env: ‘bash\r’: No such file or directory
+> ```
+> Execute next commands:
+> ```
+> $ sed $'s/\r$//' ./gradlew > ./gradlew.Unix
+> $ ./gradlew.Unix build
+> ```
 
 Once compilation is completed a JAR file will be generated, with that you would have everything you need to deploy the solution, which is done using ```docker-compose``` command.
 
@@ -124,4 +190,7 @@ Once containers are up you will be able to access the application from a browser
 * Tomcat: http://localhost:8080
 
 Read more about Docker Compose commands on the [reference](https://docs.docker.com/compose/reference/) guide.
+
+
+> **_Tip._** You can end *$ docker-compose up* with *CTRL+C*
 
