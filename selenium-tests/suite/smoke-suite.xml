@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="smoke-suite" verbose="10">
+  <test name="smoke-test">
+    <classes>
+      <class name="com.nearshoretechnology.qa.auto.cd_poc.test.GoogleSearchPageTest"/>
+      <!-- <class name="com.nearshoretechnology.qa.auto.cd_poc.test.GoogleSearchResultsPageTest"/-->
+    </classes>
+  </test> <!-- smoke-test -->
+</suite> <!-- smoke-suite -->

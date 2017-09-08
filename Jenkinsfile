@@ -38,9 +38,16 @@ node {
         }
     }
 
-    stage('Updating Production Server') {
-        sshagent (credentials: ['production-server-ssh-credentials']) {
-            sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2200 10.26.0.130 /vagrant/update-image-spring-mvc-app-cd.sh $BUILD_NUMBER'
+    stage('Updating Testing Server') {
+        sshagent (credentials: ['testing-server-ssh-credentials']) {
+            sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2200 10.26.0.130 /vagrant/update-image-spring-mvc-app.sh $BUILD_NUMBER'
+        }
+    }
+
+    stage('Run Selenium Tests') {
+        dir ('selenium-tests') {
+            sh 'mvn initialize'
+            sh 'mvn package'
         }
     }
 }

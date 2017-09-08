@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"    standalone="no"?>
+<project name="cd-poc" basedir=".">
+  <property name="build.dir" value="${basedir}/build"/>
+  <property name="external.jars" value=".\resources"/>
+  <property name="ytoperation.dir" value="${external.jars}/YTOperation"/>
+  <property name="src.dir" value="${basedir}/src"/>
+
+  <target name="setClassPath">
+    <path id="classpath_jars">
+      <pathelement path="${basedir}/"/>
+    </path>
+    <pathconvert pathsep=";" property="test.classpath" refid="classpath_jars"/>
+  </target>
+
+  <target name="clean">
+    <!--echo tag will use to print text on console-->
+    <echo message="deleting existing build directory"/>
+    <!--delete tag will clean data from given folder-->
+    <delete dir="${build.dir}"/>
+  </target>
+
+  <target name="compile" depends="clean,setClassPath">
+    <echo message="classpath:${test.classpath}"/>
+    <echo message="compiling..."/>
+    <!--mkdir tag will create new director-->
+    <mkdir dir="${build.dir}"/>
+    <echo message="classpath:${test.classpath}"/>
+    <echo message="compiling..."/>
+    <!--javac tag used to compile java source code and move .class files to a new folder-->
+    <javac destdir="${build.dir}" srcdir="${src.dir}">
+      <classpath refid="classpath_jars"/>
+    </javac>
+    <!--jar tag will create jar file from .class files-->
+    <jar destfile="${ytoperation.dir}/YTOperation.jar" basedir="${build.dir}">
+      <!--manifest tag will set your main class for execution-->
+      <manifest>
+        <attribute name="Main-Class" value="testAnt.Guru99AntClass"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="run" depends="compile">
+    <!--java tag will execute main function from the jar created in compile target section-->
+    <java jar="${ytoperation.dir}/YTOperation.jar" fork="true"/>
+  </target>
+
+</project>
