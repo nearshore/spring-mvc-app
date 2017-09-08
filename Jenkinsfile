@@ -1,24 +1,24 @@
 node {
     def app
 
-    stage('Clone repository') {
+    stage('Cloning repository') {
         /* Let's make sure we have the repository cloned to our workspace */
 
         checkout scm
     }
 
-    stage('Build App') {
+    stage('Building App') {
         sh 'gradle build --info'
     }
 
-    stage('Build Image') {
+    stage('Building Image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
         app = docker.build("spring-mvc-app")
     }
 
-    stage('Test Image') {
+    stage('Testing Image') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
 
@@ -27,7 +27,7 @@ node {
         }
     }
 
-    stage('Push Image') {
+    stage('Pushing Image') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
@@ -44,7 +44,7 @@ node {
         }
     }
 
-    stage('Run Selenium Tests') {
+    stage('Running Selenium Tests') {
         dir ('selenium-tests') {
             sh 'mvn initialize'
             sh 'mvn package'
