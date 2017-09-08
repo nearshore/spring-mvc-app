@@ -48,7 +48,7 @@ node {
         dir ('selenium-tests') {
             sh 'mvn initialize'
             sh 'mvn package'
-            sh 'java -cp /var/lib/jenkins/.cp org.testng.TestNG ./suite/smoke-suite.xml'
+            sh 'java -cp /var/lib/jenkins/.cp/* org.testng.TestNG ./suite/smoke-suite.xml'
         }
     }
 }
