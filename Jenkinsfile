@@ -51,4 +51,14 @@ node {
             sh 'java -cp /var/lib/jenkins/.cp/* org.testng.TestNG ./suite/smoke-suite.xml'
         }
     }
+
+    
+    /* junit
+    */
+    post {
+      always {
+        junit '**/reports/junit/*.xml'
+      }
+    } 
+    
 }
