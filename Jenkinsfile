@@ -40,7 +40,7 @@ node {
 
     stage('Updating Testing Server') {
         sshagent (credentials: ['testing-server-ssh-credentials']) {
-            sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2200 10.26.1.129 /vagrant/update-image-spring-mvc-app.sh $BUILD_NUMBER'
+            sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2202 10.26.1.185 /vagrant/update-image-spring-mvc-app.sh $BUILD_NUMBER'
         }
     }
 
@@ -51,4 +51,5 @@ node {
             sh 'java -cp /var/lib/jenkins/.cp/* org.testng.TestNG ./suite/smoke-suite.xml'
         }
     }
+    
 }
