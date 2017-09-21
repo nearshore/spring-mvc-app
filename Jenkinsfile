@@ -6,6 +6,11 @@ node {
 
         checkout scm
     }
+    
+    stage('Testing App (JUnit)') {
+        sh 'gradle cleanTest test --info'
+        junit '**/build/test-results/*.xml'
+    }
 
     stage('Building App') {
         sh 'gradle build --info'
@@ -49,6 +54,17 @@ node {
             sh 'mvn initialize'
             sh 'mvn package'
             sh 'java -cp /var/lib/jenkins/.cp/* org.testng.TestNG ./suite/smoke-suite.xml'
+            
+            junit '**/test-output/junitreports/*.xml'
+            
+            publishHTML (target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'test-output',
+                reportFiles: 'index.html',
+                reportName: 'Selenium Test Report'
+            ])
         }
     }
     
