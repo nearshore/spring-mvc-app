@@ -41,4 +41,10 @@ public class ApplicationTest {
       .andExpect(content().string(containsString("Hello Romel")));
   }
 
+  @Test
+  public void helloFail() throws Exception {
+    mockMvc.perform(get("/hello").param("name", "Fail"))
+      .andExpect(content().string(containsString("Hello Romel")));
+  }
+  
 }
