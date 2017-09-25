@@ -28,7 +28,8 @@ node {
              * For this example, we're using a Volkswagen-type approach ;-) */
 
             app.inside {
-                sh 'curl http://127.0.0.1:8080'
+                sh 'uname -a'
+                sh 'pwd'
             }
         }
 
