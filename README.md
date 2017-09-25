@@ -7,7 +7,7 @@ The information below describes the steps to follow to build the docker image an
 ## Overview
 
 [Docker](https://www.docker.com/) is a software deployment platform where everything required to make a piece of software to run is packaged into isolated containers.
-[Pipeline]A continuous delivery pipeline is an automated expression of your process for getting software from version control right through to your users and customers. Every change to your software (committed in source control) goes through a complex process on its way to being released. 
+[Pipeline](https://jenkins.io/doc/book/pipeline/) is an automated expression of your process for getting software from version control right through to your users and customers. Every change to your software (committed in source control) goes through a complex process on its way to being released. 
 
 ## Instructions at Jenkins Server
 
