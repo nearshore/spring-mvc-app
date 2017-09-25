@@ -11,9 +11,9 @@ The information below describes the steps to follow to build the docker image an
 
 ## Instructions at Jenkins Server
 
-### 1. Create New Item - Select Pipeline
-### 2. Select GitHub project: Enter GitHub URL
-### 3. Select GitHub hook trigger for GITScm polling
-### 5. Select Pipeline script from SCM: Enter GitHub URL
-### 5. At Branches to build enter: /testing
-### 5. At GitHub select settings, click Webhooks and enter the Jenkins server webhook URL
+1. Create New Item - Select Pipeline.
+2. Select GitHub project: Enter GitHub URL.
+3. Select GitHub hook trigger for GITScm polling.
+4. Select Pipeline script from SCM: Enter GitHub URL.
+5. At Branches to build enter: /testing.
+6. At GitHub select settings, click Webhooks and enter the Jenkins server webhook URL.
