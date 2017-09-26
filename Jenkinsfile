@@ -10,7 +10,6 @@ node {
         
         stage('Testing App (JUnit)') {
             sh 'gradle cleanTest test --info'
-            junit '**/build/test-results/*.xml'
         }
 
         stage('Building App') {
@@ -46,7 +45,7 @@ node {
         
         stage('Updating Testing Server') {
             sshagent (credentials: ['testing-server-ssh-credentials']) {
-                sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2202 192.168.0.6 /vagrant/update-image-spring-mvc-app.sh $BUILD_NUMBER'
+                sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2202 10.26.0.68 /vagrant/update-image-spring-mvc-app.sh $BUILD_NUMBER'
             }
         }
     
@@ -55,7 +54,19 @@ node {
         currentBuild.result = "FAILED"
         throw e
     } finally {
+        junit '**/build/test-results/*.xml'
+        
+        publishHTML (target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: 'build/reports/tests',
+            reportFiles: 'index.html',
+            reportName: 'JUnit Report'
+        ])
+            
         notifyBuild(currentBuild.result)
+        
     }
 }
 
@@ -87,7 +98,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
     emailext (
         subject: subject,
         body: details,
-        to: 'jorge.alexandro@gmail.com',
+        to: 'jorge.martinez@nearshoretechnology.com',
         recipientProviders: [[$class: 'DevelopersRecipientProvider']]
     )
 }
