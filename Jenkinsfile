@@ -48,6 +48,25 @@ node {
                 sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2202 10.26.0.68 /vagrant/update-image-spring-mvc-app.sh $BUILD_NUMBER'
             }
         }
+
+        stage('Running Selenium Tests') {
+            dir ('selenium-tests') {
+                sh 'mvn initialize'
+                sh 'mvn package'
+                sh 'java -cp /var/lib/jenkins/.cp/* org.testng.TestNG ./suite/smoke-suite.xml'
+                
+                //junit '**/test-output/junitreports/*.xml'
+                
+                publishHTML (target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'test-output',
+                    reportFiles: 'index.html',
+                    reportName: 'Selenium Test Report'
+                ])
+            }
+        }
     
     } catch (e) {
         // If there was an exception thrown, the build failed
