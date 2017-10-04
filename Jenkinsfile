@@ -45,7 +45,7 @@ node {
         
         stage('Updating Testing Server') {
             sshagent (credentials: ['testing-server-ssh-credentials']) {
-                sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2202 10.26.0.68 /vagrant/update-image-spring-mvc-app.sh $BUILD_NUMBER'
+                sh 'ssh -o StrictHostKeyChecking=no -l ubuntu -p 2202 10.26.1.81 /vagrant/update-image-spring-mvc-app.sh $BUILD_NUMBER'
             }
         }
 
